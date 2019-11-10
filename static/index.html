@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css" media="screen" />
+  </head>
+  <body>
+    <h1 class="title">Dashboard</h1>
+
+    <div id="widgets">
+    </div>
+
+    <script type="text/javascript">
+      // FIXME: (MT) This is temp. This will be a component
+      // with better styling and everything once we move to
+      // React
+      // This could technically be a class. Since we'd be moving
+      // to React, this doesn't need to be refactored for the
+      // time being
+      const map = {};
+
+      function updateMap(widget) {
+        map[widget.id] = widget;
+        return map;
+      }
+
+      function renderWidget(widget) {
+        return `
+          <div class="widget">
+            <div class="widget-top">
+              <div class="widget-app">
+                <span>${widget.app}</span>
+              </div>
+              <div class="widget-env">
+                <span>${widget.environment}</span>
+              </div>
+            </div>
+
+            <div class="widget-middle">
+              <div class="widget-branch">
+                <span>${widget.branch}</span>
+              </div>
+              <div class="widget-committer">
+                <span>(${widget.committer})</span>
+              </div>
+              <div class="widget-commit">
+                <span>${widget.commit}</span>
+              </div>
+            </div>
+
+            <div class="widget-bottom">
+              <div class="widget-status">
+                <span class="dot">●</span>
+                <span class="status-text">${widget.status}</span>
+              </div>
+              <div class="widget-category">
+                <span>${widget.category}</span>
+              </div>
+              <div class="widget-timestamp">
+                <span>${widget.updatedAt ? timeSince(new Date(widget.updatedAt)) : 'few secs'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function timeSince(timeStamp) {
+        var now = new Date(),
+          secondsPast = (now.getTime() - timeStamp.getTime()) / 1000;
+        if (secondsPast < 60){
+          return parseInt(secondsPast) + 's';
+        }
+        if (secondsPast < 3600){
+          return parseInt(secondsPast/60) + 'm';
+        }
+        if (secondsPast <= 86400){
+          return parseInt(secondsPast/3600) + 'h';
+        }
+        if (secondsPast > 86400){
+            day = timeStamp.getDate();
+            month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ","");
+            year = timeStamp.getFullYear() == now.getFullYear() ? "" :  " " + timeStamp.getFullYear();
+            return day + " " + month + year;
+        }
+      }
+
+      function renderWidgets() {
+        const widgetContainer = document.body.querySelector('#widgets');
+        let widgetHTML = '';
+
+        Object.keys(map).forEach((widgetId) => {
+          widgetHTML += renderWidget(map[widgetId]);
+        });
+
+        widgetContainer.innerHTML = widgetHTML;
+      }
+
+      // this is rendered from server side
+      const widgets = {{ . }};
+      if (widgets && widgets.length > 0) {
+        widgets.forEach(updateMap);
+        renderWidgets();
+      }
+    </script>
+    <script type="text/javascript" src="/static/js/app.js"></script>
+  </body>
+</html>
