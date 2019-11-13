@@ -6,7 +6,7 @@
 
 Dashboard is designed to allow developers to build widgets by writing plug-ins. Dashboard supports plug-ins written in JSON out-of-the-box. Support for other technologies such as TOML, YAML etc will be added in the future. The goal is to allow developers to develop their own custom plug-ins which can be shared among the members of the Dashboard community. The project is actively being developed
 
-![](https://i.imgur.com/r4Dla3J.png)
+![](https://i.imgur.com/xHb0goi.png)
 
 
 ## Getting Started
