@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"os"
 	"runtime"
-	"time"
 	"strconv"
+	"time"
 
 	"github.com/mohnish/dashboard/component"
 	"github.com/mohnish/dashboard/hub"
@@ -117,7 +117,7 @@ func main() {
 			}
 
 			log.Println("subscribing to", pluginConfig.Url, interval)
-			f := subs.Fetch(pluginConfig.Url, time.Duration(interval) * time.Second)
+			f := subs.Fetch(pluginConfig.Url, time.Duration(interval)*time.Second)
 			s := subs.Subscribe(f) // starts the sub
 			subscriptions = append(subscriptions, s)
 		}
