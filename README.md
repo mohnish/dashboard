@@ -2,7 +2,7 @@
 
 > A simple and extensible dashboard to display data that matters to you
 
-**WARNING: THIS IS ALPHA STAGE SOFTWARE**
+**WARNING: Project is under active development**
 
 Dashboard is designed to allow developers to build widgets by writing plug-ins. Dashboard supports plug-ins written in JSON out-of-the-box. Support for other technologies such as TOML, YAML etc will be added in the future. The goal is to allow developers to develop their own custom plug-ins which can be shared among the members of the Dashboard community. The project is actively being developed
 
