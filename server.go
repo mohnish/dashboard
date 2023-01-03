@@ -32,9 +32,6 @@ var (
 )
 
 func main() {
-	// TODO: (MT) Extract these functions into
-	// - router
-	// - handlers
 	// Handle landing page
 	// This function will
 	// 1. render a template and load react
